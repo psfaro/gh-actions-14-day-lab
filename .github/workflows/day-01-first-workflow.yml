@@ -16,7 +16,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Show workflow name
-        run: echo "Workflow: ${{ github.workflow }}"
+        run: |
+          echo "Workflow: ${{ github.workflow }}"
       - name: Show runner information
         run: |
           echo "OS: $RUNNER_OS"

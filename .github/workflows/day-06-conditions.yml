@@ -30,3 +30,6 @@ jobs:
       - name: Version tag example
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         run: echo "Version tag detected"
+      - name: Only on main
+        if: ${{ github.ref_name == 'main' }}
+        run: echo "Running on the main branch"

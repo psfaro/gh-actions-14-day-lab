@@ -1,0 +1,27 @@
+name: Day 02 - Triggers and Inputs
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Select a simulated deployment environment
+        required: true
+        type: choice
+        options: [development, test, production]
+      run_tests:
+        description: Run tests before deployment
+        required: true
+        default: true
+        type: boolean
+permissions:
+  contents: read
+jobs:
+  inspect-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "Environment: ${{ inputs.environment }}"
+          echo "Run tests: ${{ inputs.run_tests }}"
+      - uses: actions/checkout@v4
+      - if: ${{ inputs.run_tests }}
+        run: npm test

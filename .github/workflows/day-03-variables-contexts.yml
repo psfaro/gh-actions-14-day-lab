@@ -1,0 +1,29 @@
+name: Day 03 - Variables and Contexts
+on: workflow_dispatch
+env:
+  SCOPE_VALUE: workflow
+  WORKFLOW_VALUE: available-to-all-jobs
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    env:
+      SCOPE_VALUE: job
+      JOB_VALUE: available-to-all-steps-in-job
+    steps:
+      - name: Print scopes and default variables
+        env:
+          SCOPE_VALUE: step
+          STEP_VALUE: only-this-step
+        run: |
+          echo "Scope winner: $SCOPE_VALUE"
+          echo "Workflow value: $WORKFLOW_VALUE"
+          echo "Job value: $JOB_VALUE"
+          echo "Step value: $STEP_VALUE"
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Actor: $GITHUB_ACTOR"
+          echo "Full ref: $GITHUB_REF"
+          echo "Short ref: $GITHUB_REF_NAME"
+          echo "SHA: $GITHUB_SHA"
+          echo "Repository variable: ${{ vars.LAB_MESSAGE }}"

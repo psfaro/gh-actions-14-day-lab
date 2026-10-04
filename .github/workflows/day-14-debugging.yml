@@ -1,0 +1,37 @@
+name: Day 14 - Debugging and Final Assessment
+on:
+  workflow_dispatch:
+    inputs:
+      force_failure:
+        description: Force a failure to inspect logs
+        required: true
+        default: true
+        type: boolean
+permissions:
+  contents: read
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create annotations
+        run: |
+          echo "::notice file=README.md,line=1::Day 14 notice annotation"
+          echo "::warning file=README.md,line=1::Day 14 warning annotation"
+          echo "::debug::This appears when step debugging is enabled"
+      - name: Mask a dynamic value
+        run: |
+          VALUE="debug-${GITHUB_RUN_ID}"
+          echo "::add-mask::$VALUE"
+          echo "Masked value: $VALUE"
+      - name: Force optional failure
+        if: ${{ inputs.force_failure }}
+        run: |
+          echo "::error::Intentional failure for troubleshooting practice"
+          exit 1
+      - name: Always create summary
+        if: ${{ always() }}
+        run: |
+          echo "## Day 14 Diagnostic Summary" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Event: $GITHUB_EVENT_NAME" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Run ID: $GITHUB_RUN_ID" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Result inspection required" >> "$GITHUB_STEP_SUMMARY"

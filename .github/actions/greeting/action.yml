@@ -1,0 +1,16 @@
+name: Greeting composite action
+description: Creates a reusable greeting output
+inputs:
+  name:
+    description: Name to greet
+    required: true
+outputs:
+  message:
+    description: Generated greeting
+    value: ${{ steps.create.outputs.message }}
+runs:
+  using: composite
+  steps:
+    - id: create
+      shell: bash
+      run: echo "message=Hello, ${{ inputs.name }}!" >> "$GITHUB_OUTPUT"

@@ -1,0 +1,24 @@
+name: Day 09 - Runners and Labels
+on:
+  workflow_dispatch:
+    inputs:
+      use_self_hosted:
+        description: Run the optional self-hosted job
+        required: true
+        default: false
+        type: boolean
+permissions:
+  contents: read
+jobs:
+  hosted:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Runner OS: $RUNNER_OS"
+          echo "Runner architecture: $RUNNER_ARCH"
+          echo "Runner name: $RUNNER_NAME"
+  self-hosted:
+    if: ${{ inputs.use_self_hosted }}
+    runs-on: [self-hosted, linux, gh200-lab]
+    steps:
+      - run: echo "Matched all requested self-hosted runner labels"

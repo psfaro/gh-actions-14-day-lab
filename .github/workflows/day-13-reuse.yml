@@ -1,0 +1,21 @@
+name: Day 13 - Reusable Workflows and Composite Actions
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  reusable-build:
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      node-version: '22'
+  use-result:
+    needs: reusable-build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/greeting
+        id: greet
+        with:
+          name: GH-200 learner
+      - run: |
+          echo "Greeting output: ${{ steps.greet.outputs.message }}"
+          echo "Reusable workflow output: ${{ needs.reusable-build.outputs.package-name }}"

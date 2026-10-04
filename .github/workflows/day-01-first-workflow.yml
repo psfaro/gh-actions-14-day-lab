@@ -1,0 +1,25 @@
+name: Day 01 - Workflow Fundamentals
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'test/**'
+      - '.github/workflows/day-01-first-workflow.yml'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Show runner information
+        run: |
+          echo "OS: $RUNNER_OS"
+          echo "Architecture: $RUNNER_ARCH"
+      - name: Test application
+        run: npm test
+      - name: Build application
+        run: npm run build

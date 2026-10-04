@@ -1,0 +1,24 @@
+name: Day 11 - Environments and Concurrency
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Deployment environment
+        required: true
+        type: choice
+        options: [test, production]
+permissions:
+  contents: read
+concurrency:
+  group: deployment-${{ inputs.environment }}
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment }}
+    steps:
+      - run: |
+          echo "Simulating deployment to ${{ inputs.environment }}"
+          sleep 20
+          echo "Simulation complete"

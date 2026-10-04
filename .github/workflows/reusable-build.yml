@@ -1,0 +1,26 @@
+name: Reusable Build
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        required: true
+        type: string
+    outputs:
+      package-name:
+        description: Generated package name
+        value: ${{ jobs.build.outputs.package-name }}
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      package-name: ${{ steps.metadata.outputs.package-name }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+      - run: npm test
+      - id: metadata
+        run: echo "package-name=application-${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"

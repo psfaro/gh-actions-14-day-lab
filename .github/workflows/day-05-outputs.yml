@@ -15,6 +15,7 @@ jobs:
         run: |
           echo "version=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
           echo "package_name=app-${GITHUB_RUN_NUMBER}.zip" >> "$GITHUB_OUTPUT"
+          echo "build_date=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
       - name: Use step output
         run: echo "Version is ${{ steps.metadata.outputs.version }}"
   consume:
@@ -22,6 +23,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "version=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
-          echo "package_name=app-${GITHUB_RUN_NUMBER}.zip" >> "$GITHUB_OUTPUT"
-          echo "build_date=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+          echo "Version from build job: ${{ needs.build.outputs.version }}"
+          echo "Package: ${{ needs.build.outputs.package_name }}"
+          echo "Build date: ${{ needs.build.outputs.build_date }}"

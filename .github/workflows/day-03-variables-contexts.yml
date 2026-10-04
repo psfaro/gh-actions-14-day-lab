@@ -14,7 +14,6 @@ jobs:
     steps:
       - name: Print scopes and default variables
         env:
-          SCOPE_VALUE: step
           STEP_VALUE: only-this-step
         run: |
           echo "Scope winner: $SCOPE_VALUE"

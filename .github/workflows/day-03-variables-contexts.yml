@@ -25,4 +25,5 @@ jobs:
           echo "Full ref: $GITHUB_REF"
           echo "Short ref: $GITHUB_REF_NAME"
           echo "SHA: $GITHUB_SHA"
+          echo "Runner OS: ${{ runner.os }}"          
           echo "Repository variable: ${{ vars.LAB_MESSAGE }}"

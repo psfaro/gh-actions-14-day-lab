@@ -12,6 +12,11 @@ on:
         required: true
         default: true
         type: boolean
+      release_note:
+        description: Short note describing this run
+        required: false
+        default: ''
+        type: string
 permissions:
   contents: read
 jobs:
@@ -22,6 +27,12 @@ jobs:
           echo "Event: ${{ github.event_name }}"
           echo "Environment: ${{ inputs.environment }}"
           echo "Run tests: ${{ inputs.run_tests }}"
+
+      - run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "Environment: ${{ inputs.environment }}"
+          echo "Run tests: ${{ inputs.run_tests }}"
+          echo "Release note: ${{ inputs.release_note }}"
       - uses: actions/checkout@v4
       - if: ${{ inputs.run_tests }}
         run: npm test

@@ -37,7 +37,6 @@ Replace `YOUR-ACCOUNT` with your GitHub account or organization.
 - Most workflows use `workflow_dispatch`, so they run only when manually started.
 - The issue-creation lab requires `issues: write` and creates a clearly labeled test issue.
 - The deployment labs echo a simulated deployment command. They do not deploy real infrastructure.
-- The release lab creates a draft release only.
 - The self-hosted runner lab is disabled until you add the required runner labels.
 
 ## Daily method
@@ -77,4 +76,4 @@ npm test
 npm run build
 ```
 
-The build creates `dist/app.txt`, which is used by artifact and release exercises.
+The build creates `dist/app.txt`, which is used by the artifact exercises.

@@ -10,6 +10,7 @@ jobs:
       - name: List recent workflow runs with GitHub CLI
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
         run: gh run list --limit 5
       - name: Query repository through REST API
         env:

@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - 'src/**'
-      - '.github/workflows/day-01-first-workflow.yml'
+   
 permissions:
   contents: read
 jobs:

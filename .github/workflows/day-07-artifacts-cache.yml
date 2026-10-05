@@ -18,7 +18,7 @@ jobs:
         with:
           name: application-package
           path: dist/
-          retention-days: 7
+          retention-days: 3
   consume:
     needs: build
     runs-on: ubuntu-latest

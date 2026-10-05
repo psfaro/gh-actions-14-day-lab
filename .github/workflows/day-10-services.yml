@@ -20,5 +20,5 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y redis-tools
       - name: Test Redis
         run: |
-          redis-cli -h 127.0.0.1 -p 6379 SET gh200 ready
-          test "$(redis-cli -h 127.0.0.1 -p 6379 GET gh200)" = "ready"
+          redis-cli -h 127.0.0.1 -p 6379 SET lab-day10 complete
+          test "$(redis-cli -h 127.0.0.1 -p 6379 GET lab-day10)" = "complete"
